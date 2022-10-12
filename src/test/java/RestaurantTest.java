@@ -5,6 +5,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -84,6 +85,19 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @Test
+    public void get_order_value_should_return_right_order_total(){
+        LocalTime openingTime = LocalTime.parse("10:30:00");
+        LocalTime closingTime = LocalTime.parse("22:00:00");
+        restaurant = new Restaurant("Scott's cafe","Chennai",openingTime,closingTime);
+        restaurant.addToMenu("Sweet corn soup",119);
+        restaurant.addToMenu("Vegetable lasagne", 269);
+        restaurant.addToMenu("White Sauce Pasta", 300);
+        restaurant.addToMenu("Chicken Noodles", 150);
+        ArrayList<String> orderedItems= new ArrayList<String>();
+        orderedItems.add("White Sauce Pasta");
+        orderedItems.add("Chicken Noodles");
+        assertEquals(450, restaurant.getOrderValue(orderedItems));
 
-
+    }
 }
